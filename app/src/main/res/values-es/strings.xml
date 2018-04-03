@@ -6,5 +6,5 @@
 
     <string name="action_settings">Configuracion</string>
     <string name="signing_in_label">Iniciando sesion</string>
-
+    <string name="trips_refresh_label">No se encontraron viajes, desliza hacia abajo para refrescar</string>
 </resources>
