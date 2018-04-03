@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "674654972555",
+    "firebase_url": "https://petgo-35adc.firebaseio.com",
+    "project_id": "petgo-35adc",
+    "storage_bucket": "petgo-35adc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674654972555:android:52a08c6e4f5101be",
+        "android_client_info": {
+          "package_name": "mx.iteso.petgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "674654972555-nop054f1p4k7leohjpa0gc6kfo4pfh6d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.iteso.petgo",
+            "certificate_hash": "2e23787f537c43ac0561c8775ec0853da97eba24"
+          }
+        },
+        {
+          "client_id": "674654972555-b8q5hgia90a25m5pk5ktdrkm92i5fcu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrvXYniO_76K-XWrQIdZn-GTRmNTq6Unc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "674654972555-b8q5hgia90a25m5pk5ktdrkm92i5fcu3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
