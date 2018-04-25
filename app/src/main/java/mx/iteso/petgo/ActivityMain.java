@@ -17,12 +17,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import mx.iteso.petgo.beans.Trip;
 import mx.iteso.petgo.beans.User;
 import mx.iteso.petgo.databinding.ActivityMainBinding;
 import mx.iteso.petgo.fragments.FragmentHome;
 import mx.iteso.petgo.fragments.FragmentProfile;
 import mx.iteso.petgo.fragments.FragmentTrips;
 
+import static mx.iteso.petgo.utils.Constants.ADD_SCHEDULE_TRIP;
+import static mx.iteso.petgo.utils.Constants.PARCELABLE_TRIP;
 import static mx.iteso.petgo.utils.Constants.PARCELABLE_USER;
 
 public class ActivityMain extends AppCompatActivity {
@@ -95,5 +98,26 @@ public class ActivityMain extends AppCompatActivity {
         if (mFragmentTrips == null)
             mFragmentTrips = FragmentTrips.newInstance(mUser);
         return mFragmentTrips;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ADD_SCHEDULE_TRIP:
+                if (resultCode == RESULT_OK && data != null) {
+                    Trip trip = data.getParcelableExtra(PARCELABLE_TRIP);
+                    if (trip != null) {
+                        onTripScheduled();
+                    }
+                } else {
+                    // TODO Toast with error
+                }
+                break;
+        }
+    }
+
+    private void onTripScheduled() {
+        // TODO add toast
     }
 }

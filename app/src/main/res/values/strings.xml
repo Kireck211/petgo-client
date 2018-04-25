@@ -35,4 +35,12 @@
     <string name="time_icon_content_description">time icon</string>
     <string name="date_format">dd/mm/yyyy</string>
     <string name="hour_format">hh:mm</string>
+    <string name="save_string">Save</string>
+    <string name="cancel_string">Cancel</string>
+
+    <string-array name="sizes">
+        <item>Large</item>
+        <item>Medium</item>
+        <item>Small</item>
+    </string-array>
 </resources>

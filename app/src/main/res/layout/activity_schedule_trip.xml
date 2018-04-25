@@ -54,8 +54,29 @@
             android:layout_below="@id/ib_date_schedule_trip"
             android:layout_alignParentEnd="true"
             android:contentDescription="@string/time_icon_content_description"/>
-        
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel_schedule_trip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/cancel_string"/>
+
+        <Button
+            android:id="@+id/btn_accept_schedule_trip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/save_string"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>
 </layout>
