@@ -70,6 +70,7 @@ public class ActivityMain extends AppCompatActivity {
 
         BottomNavigationView navigation = mBinding.navigation;
         navigation.setOnNavigationItemSelectedListener(navListener);
+        navigation.setSelectedItemId(R.id.navigation_petgo);
 
         if (savedInstanceState == null) {
             mFragmentHome = getHomeInstance();

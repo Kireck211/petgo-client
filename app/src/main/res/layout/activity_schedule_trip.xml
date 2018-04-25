@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityScheduleTrip"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select pet"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_pet_schedule_trip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <EditText
+            android:id="@+id/et_date_schedule_trip"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="date"
+            android:hint="@string/date_format"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/ib_date_schedule_trip"/>
+
+        <ImageButton
+            android:id="@+id/ib_date_schedule_trip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/date_icon_content_description"/>
+
+        <EditText
+            android:id="@+id/et_time_schedule_trip"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="time"
+            android:hint="@string/hour_format"
+            android:layout_below="@id/et_date_schedule_trip"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/ib_time_schedule_trip" />
+
+        <ImageButton
+            android:id="@+id/ib_time_schedule_trip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ib_date_schedule_trip"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/time_icon_content_description"/>
+        
+    </RelativeLayout>
+
+</LinearLayout>
+</layout>

@@ -28,6 +28,7 @@ public class Constants {
     public static final String USER_PREFERENCES = "mx.iteso.petgo.USER_PREFERENCES";
     public static final String USER_TOKEN = "USER_TOKEN";
     public static final String USER_PROVIDER = "USER_PROVIDER";
+    public static final int PERMISSION_LOCATION = 1234;
 
     // Values set to database
     public static final String CLIENT = "client";

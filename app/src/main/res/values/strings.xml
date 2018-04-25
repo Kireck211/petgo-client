@@ -30,4 +30,9 @@
     <string name="title_activity_splash_screen">ActivitySplashScreen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="date_icon_content_description">date icon</string>
+    <string name="time_icon_content_description">time icon</string>
+    <string name="date_format">dd/mm/yyyy</string>
+    <string name="hour_format">hh:mm</string>
 </resources>

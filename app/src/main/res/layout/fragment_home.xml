@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/rv_fragment_home"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</android.support.v7.widget.RecyclerView>
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageButton
+        android:id="@+id/btn_request_trip_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/v_btn_separator_home"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_location_on_black_24dp"/>
+
+    <View
+        android:id="@+id/v_btn_separator_home"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageButton
+        android:id="@+id/btn_schedule_trip_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/v_btn_separator_home"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_access_time_black_24dp"/>
+
+</RelativeLayout>
 </layout>
