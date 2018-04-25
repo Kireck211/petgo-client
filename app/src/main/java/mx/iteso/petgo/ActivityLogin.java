@@ -27,12 +27,20 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 import mx.iteso.petgo.beans.User;
 import mx.iteso.petgo.databinding.ActivityLoginBinding;
+import mx.iteso.petgo.utils.Constants;
 
-import static mx.iteso.petgo.utils.Constants.FACEBOOK_PROVIDER;
-import static mx.iteso.petgo.utils.Constants.GOOGLE_PROVIDER;
+import static mx.iteso.petgo.utils.Constants.CLIENT;
 import static mx.iteso.petgo.utils.Constants.PARCELABLE_USER;
 
 public class ActivityLogin extends ActivityBase implements View.OnClickListener {
@@ -44,6 +52,8 @@ public class ActivityLogin extends ActivityBase implements View.OnClickListener 
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private CallbackManager mCallbackManager;
+    private DatabaseReference mReference;
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +61,7 @@ public class ActivityLogin extends ActivityBase implements View.OnClickListener 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        mReference = FirebaseDatabase.getInstance().getReference();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -96,27 +107,41 @@ public class ActivityLogin extends ActivityBase implements View.OnClickListener 
         }
     }
 
-    private void updateUI(FirebaseUser user) {
+    private void updateUI(final FirebaseUser user) {
         hideProgressDialog();
         if (user != null) { // User authenticated
-            User loginUsser = new User();
-            loginUsser.setEmail(user.getEmail());
-            loginUsser.setName(user.getDisplayName());
-            loginUsser.setTokenId(user.getUid());
-            String provider = null;
-            if (user.getProviderData().size() > 1)
-                provider = user.getProviderData().get(1).getProviderId();
+            Query query = mReference.child("users")
+                    .orderByChild("tokenId")
+                    .limitToFirst(1)
+                    .equalTo(user.getUid());
 
-            if (provider.contains(FACEBOOK_PROVIDER)) {
-                loginUsser.setProvider(FACEBOOK_PROVIDER);
-            } else if (provider.contains(GOOGLE_PROVIDER)){
-                loginUsser.setProvider(GOOGLE_PROVIDER);
-            }
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            mUser = snapshot.getValue(User.class);
+                        }
+                    } else {
+                        mUser.setTokenId(user.getUid());
+                        mUser.setName(user.getDisplayName());
+                        mUser.setAvailability(true);
+                        mUser.setPicture(user.getPhotoUrl().toString());
+                        mUser.setType(CLIENT);
 
-            Intent intent = new Intent(this, ActivityMain.class);
-            intent.putExtra(PARCELABLE_USER, loginUsser);
-            startActivity(intent);
-            finish();
+                        String userId = mReference.child("users").push().getKey();
+                        mReference.child("users").child(userId).setValue(mUser);
+                    }
+                    Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
+                    intent.putExtra(PARCELABLE_USER, mUser);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 

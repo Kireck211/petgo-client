@@ -13,4 +13,13 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="trips_refresh_label">No trips found, swipe down to refresh</string>
+    <string name="title_activity_main2">ActivityMain2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="pet_tacker_image_description">Pet tacker image</string>
+    <string name="user_image_view_content">User image</string>
+    <string name="pet_image_content_description">Pet image</string>
+    <string name="address_icon_content_description">Address icon</string>
+    <string name="phone_icon_content_description">Phone icon</string>
 </resources>

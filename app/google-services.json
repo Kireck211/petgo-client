@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "674654972555",
-    "firebase_url": "https://petgo-35adc.firebaseio.com",
-    "project_id": "petgo-35adc",
-    "storage_bucket": "petgo-35adc.appspot.com"
+    "project_number": "693851004309",
+    "firebase_url": "https://petgo-c5e79.firebaseio.com",
+    "project_id": "petgo-c5e79",
+    "storage_bucket": "petgo-c5e79.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:674654972555:android:52a08c6e4f5101be",
+        "mobilesdk_app_id": "1:693851004309:android:52a08c6e4f5101be",
         "android_client_info": {
           "package_name": "mx.iteso.petgo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "674654972555-nop054f1p4k7leohjpa0gc6kfo4pfh6d.apps.googleusercontent.com",
+          "client_id": "693851004309-66pp5hduoqaodhjo48l26cut0iciakr3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "mx.iteso.petgo",
@@ -23,13 +23,21 @@
           }
         },
         {
-          "client_id": "674654972555-b8q5hgia90a25m5pk5ktdrkm92i5fcu3.apps.googleusercontent.com",
+          "client_id": "693851004309-es8h6h9762qg7qs5s0tkcdn6gkkq7q8s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.iteso.petgo",
+            "certificate_hash": "1815cb759ce41e3cf7f077c0fafa123e0ef4edee"
+          }
+        },
+        {
+          "client_id": "693851004309-gnu7qphrjfpdm48nqch007vedp8rjfdg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDrvXYniO_76K-XWrQIdZn-GTRmNTq6Unc"
+          "current_key": "AIzaSyBVou_SZBiYOWYUsRi4EMWF6_H8i5Mak8c"
         }
       ],
       "services": {
@@ -40,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "674654972555-b8q5hgia90a25m5pk5ktdrkm92i5fcu3.apps.googleusercontent.com",
+              "client_id": "693851004309-gnu7qphrjfpdm48nqch007vedp8rjfdg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
