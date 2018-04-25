@@ -39,13 +39,13 @@ public class ActivityMain extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             mSelectedFragment = null;
             switch (item.getItemId()) {
-                case R.id.navigation_dashboard:
+                case R.id.navigation_trips:
                     mSelectedFragment = getTripsInstance();
                     break;
-                case R.id.navigation_home:
+                case R.id.navigation_petgo:
                     mSelectedFragment = getHomeInstance();
                     break;
-                case R.id.navigation_notifications:
+                case R.id.navigation_profile:
                     mSelectedFragment = getProfileInstance();
                     break;
                 default:
@@ -63,13 +63,13 @@ public class ActivityMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        BottomNavigationView navigation = mBinding.navigation;
-        navigation.setOnNavigationItemSelectedListener(navListener);
-
-        Intent intent = getIntent();
+         Intent intent = getIntent();
         if (intent != null) {
             mUser = intent.getParcelableExtra(PARCELABLE_USER);
         }
+
+        BottomNavigationView navigation = mBinding.navigation;
+        navigation.setOnNavigationItemSelectedListener(navListener);
 
         if (savedInstanceState == null) {
             mFragmentHome = getHomeInstance();
@@ -80,19 +80,19 @@ public class ActivityMain extends AppCompatActivity {
 
     private FragmentHome getHomeInstance() {
         if (mFragmentHome == null)
-            mFragmentHome = new FragmentHome();
+            mFragmentHome = FragmentHome.newInstance(mUser);
         return mFragmentHome;
     }
 
     private FragmentProfile getProfileInstance() {
         if (mFragmentProfile == null)
-            mFragmentProfile = new FragmentProfile();
+            mFragmentProfile = FragmentProfile.newInstance(mUser);
         return mFragmentProfile;
     }
 
     private FragmentTrips getTripsInstance() {
         if (mFragmentTrips == null)
-            mFragmentTrips = new FragmentTrips();
+            mFragmentTrips = FragmentTrips.newInstance(mUser);
         return mFragmentTrips;
     }
 }

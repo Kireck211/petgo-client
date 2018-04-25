@@ -1,6 +1,7 @@
 package mx.iteso.petgo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +42,12 @@ import mx.iteso.petgo.databinding.ActivityLoginBinding;
 import mx.iteso.petgo.utils.Constants;
 
 import static mx.iteso.petgo.utils.Constants.CLIENT;
+import static mx.iteso.petgo.utils.Constants.FACEBOOK_PROVIDER;
+import static mx.iteso.petgo.utils.Constants.GOOGLE_PROVIDER;
 import static mx.iteso.petgo.utils.Constants.PARCELABLE_USER;
+import static mx.iteso.petgo.utils.Constants.USER_PREFERENCES;
+import static mx.iteso.petgo.utils.Constants.USER_PROVIDER;
+import static mx.iteso.petgo.utils.Constants.USER_TOKEN;
 
 public class ActivityLogin extends ActivityBase implements View.OnClickListener {
     private static final String TAG = "Debug " + ActivityLogin.class.getSimpleName();
@@ -110,17 +116,33 @@ public class ActivityLogin extends ActivityBase implements View.OnClickListener 
     private void updateUI(final FirebaseUser user) {
         hideProgressDialog();
         if (user != null) { // User authenticated
+            String provider = null;
+            mUser = new User();
+            mUser.setTokenId(user.getUid());
+
+            if (user.getProviderData().size() > 1) {
+                provider = user.getProviderData().get(1).getProviderId();
+            }
+
+            if (provider.contains(FACEBOOK_PROVIDER)) {
+                provider = FACEBOOK_PROVIDER;
+            } else if (provider.contains(GOOGLE_PROVIDER)) {
+                provider = GOOGLE_PROVIDER;
+            }
+
             Query query = mReference.child("users")
                     .orderByChild("tokenId")
                     .limitToFirst(1)
                     .equalTo(user.getUid());
 
+            final String finalProvider = provider;
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
                         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             mUser = snapshot.getValue(User.class);
+                            mUser.setProvider(finalProvider);
                         }
                     } else {
                         mUser.setTokenId(user.getUid());
@@ -128,10 +150,12 @@ public class ActivityLogin extends ActivityBase implements View.OnClickListener 
                         mUser.setAvailability(true);
                         mUser.setPicture(user.getPhotoUrl().toString());
                         mUser.setType(CLIENT);
+                        mUser.setProvider(finalProvider);
 
                         String userId = mReference.child("users").push().getKey();
                         mReference.child("users").child(userId).setValue(mUser);
                     }
+                    saveUser();
                     Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
                     intent.putExtra(PARCELABLE_USER, mUser);
                     startActivity(intent);
@@ -196,5 +220,14 @@ public class ActivityLogin extends ActivityBase implements View.OnClickListener 
                         }
                     }
                 });
+    }
+
+    private void saveUser() {
+        SharedPreferences sharedPreferences =
+                getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_TOKEN, mUser.getTokenId());
+        editor.putString(USER_PROVIDER, mUser.getProvider());
+        editor.apply();
     }
 }

@@ -16,12 +16,28 @@ import java.util.List;
 import mx.iteso.petgo.R;
 import mx.iteso.petgo.adapters.AdapterTrip;
 import mx.iteso.petgo.beans.Trip;
+import mx.iteso.petgo.beans.User;
+import mx.iteso.petgo.utils.Constants;
+
+import static mx.iteso.petgo.utils.Constants.PARCELABLE_USER;
 
 public class FragmentTrips extends Fragment {
+    private User mUser;
+
+    public static FragmentTrips newInstance (User user) {
+        FragmentTrips fragmentTrips = new FragmentTrips();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PARCELABLE_USER, user);
+        fragmentTrips.setArguments(bundle);
+
+        return fragmentTrips;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_trips, container, false);
+        mUser = (User) getArguments().getParcelable(PARCELABLE_USER);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.rv_fragment_trips);
         recyclerView.setHasFixedSize(true);

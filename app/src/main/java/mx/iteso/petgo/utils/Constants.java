@@ -25,6 +25,9 @@ public class Constants {
     public static final String TIME_K = "time";
     public static final String USER_K = "user";
     public static final String TYPE_K = "type";
+    public static final String USER_PREFERENCES = "mx.iteso.petgo.USER_PREFERENCES";
+    public static final String USER_TOKEN = "USER_TOKEN";
+    public static final String USER_PROVIDER = "USER_PROVIDER";
 
     // Values set to database
     public static final String CLIENT = "client";

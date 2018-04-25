@@ -18,6 +18,7 @@ public class User implements Parcelable {
     private float rating;
     private Map<String, Trip> trips;
     private String type;
+    private String provider;
 
     public User() {
         address = new HashMap<>();
@@ -106,6 +107,14 @@ public class User implements Parcelable {
         this.type = type;
     }
 
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -139,6 +148,7 @@ public class User implements Parcelable {
             dest.writeParcelable(entry.getValue(), flags);
         }
         dest.writeString(this.type);
+        dest.writeString(this.provider);
     }
 
     protected User(Parcel in) {
@@ -176,6 +186,7 @@ public class User implements Parcelable {
             this.trips.put(key, value);
         }
         this.type = in.readString();
+        this.provider = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
