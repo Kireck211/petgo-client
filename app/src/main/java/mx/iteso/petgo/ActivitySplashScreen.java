@@ -58,6 +58,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
                      User user = null;
                      for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
                          user = snapshot.getValue(User.class);
+                         user.setKeyDatabase(snapshot.getKey());
                      }
                      user.setProvider(provider);
                      Intent intent = new Intent(ActivitySplashScreen.this, ActivityMain.class);

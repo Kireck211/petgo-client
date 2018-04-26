@@ -19,6 +19,7 @@ public class User implements Parcelable {
     private Map<String, Trip> trips;
     private String type;
     private String provider;
+    private String keyDatabase;
 
     public User() {
         address = new HashMap<>();
@@ -115,6 +116,14 @@ public class User implements Parcelable {
         this.provider = provider;
     }
 
+    public String getKeyDatabase() {
+        return keyDatabase;
+    }
+
+    public void setKeyDatabase(String keyDatabase) {
+        this.keyDatabase = keyDatabase;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -149,6 +158,7 @@ public class User implements Parcelable {
         }
         dest.writeString(this.type);
         dest.writeString(this.provider);
+        dest.writeString(this.keyDatabase);
     }
 
     protected User(Parcel in) {
@@ -187,6 +197,7 @@ public class User implements Parcelable {
         }
         this.type = in.readString();
         this.provider = in.readString();
+        this.keyDatabase = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -66,15 +67,29 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_pet_profile"
+        <ViewSwitcher
+            android:id="@+id/vs_pet_profile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No pets registered"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_pet_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </ViewSwitcher>
+
+
 
         <Button
             android:id="@+id/btn_log_out_profile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="SIGN OUT"/>
 
     </LinearLayout>
@@ -84,7 +99,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/ic_add_black_24dp"/>
 
     </RelativeLayout>
 

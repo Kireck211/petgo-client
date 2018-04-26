@@ -3,6 +3,7 @@ package mx.iteso.petgo.utils;
 public class Constants {
     public static final String PARCELABLE_USER = "p_user";
     public static final String PARCELABLE_TRIP = "p_trip";
+    public static final String PARCELABLE_PET = "p_pet";
     public static final String FACEBOOK_PROVIDER = "facebook";
     public static final String GOOGLE_PROVIDER = "google";
     public static final String ADDRESS_K = "address";
@@ -32,6 +33,8 @@ public class Constants {
     public static final int PERMISSION_LOCATION = 1234;
     public static final int ADD_SCHEDULE_TRIP = 1;
     public static final int ADD_PET_IMAGE = 2;
+    public static final int ADD_PET = 3;
+    public static final String PET_IMAGES_PATH = "pets/";
 
     // Values set to database
     public static final String CLIENT = "client";

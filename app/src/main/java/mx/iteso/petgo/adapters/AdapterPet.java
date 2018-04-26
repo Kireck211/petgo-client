@@ -1,11 +1,14 @@
 package mx.iteso.petgo.adapters;
 
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,6 +24,11 @@ public class AdapterPet extends RecyclerView.Adapter<AdapterPet.ViewHolder>{
         mPets = pets;
     }
 
+    public void swapItems(List<Pet> pets) {
+        mPets = pets;
+        notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -34,6 +42,8 @@ public class AdapterPet extends RecyclerView.Adapter<AdapterPet.ViewHolder>{
         mBinding.tvNamePetItem.setText(pet.getName());
         mBinding.tvSizePetItem.setText(pet.getSize());
         mBinding.tvTypePetItem.setText(pet.getType());
+        Uri uri = Uri.parse(pet.getPhoto());
+        Picasso.get().load(uri).into(mBinding.ivPetItem);
     }
 
     @Override

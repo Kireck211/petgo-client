@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +25,7 @@ import mx.iteso.petgo.fragments.FragmentHome;
 import mx.iteso.petgo.fragments.FragmentProfile;
 import mx.iteso.petgo.fragments.FragmentTrips;
 
+import static mx.iteso.petgo.utils.Constants.ADD_PET;
 import static mx.iteso.petgo.utils.Constants.ADD_SCHEDULE_TRIP;
 import static mx.iteso.petgo.utils.Constants.PARCELABLE_TRIP;
 import static mx.iteso.petgo.utils.Constants.PARCELABLE_USER;
@@ -73,13 +75,13 @@ public class ActivityMain extends AppCompatActivity {
 
         BottomNavigationView navigation = mBinding.navigation;
         navigation.setOnNavigationItemSelectedListener(navListener);
-        navigation.setSelectedItemId(R.id.navigation_petgo);
+        navigation.setSelectedItemId(R.id.navigation_profile);
 
-        if (savedInstanceState == null) {
+        /*if (savedInstanceState == null) {
             mFragmentHome = getHomeInstance();
             mSelectedFragment = mFragmentHome;
             getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, mSelectedFragment).commit();
-        }
+        }*/
     }
 
     private FragmentHome getHomeInstance() {
@@ -105,19 +107,15 @@ public class ActivityMain extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case ADD_SCHEDULE_TRIP:
-                if (resultCode == RESULT_OK && data != null) {
-                    Trip trip = data.getParcelableExtra(PARCELABLE_TRIP);
-                    if (trip != null) {
-                        onTripScheduled();
-                    }
-                } else {
-                    // TODO Toast with error
+                if (resultCode == RESULT_OK) {
+                    // TODO Toast with succes adding schedule
                 }
                 break;
+            case ADD_PET:
+                if (resultCode == RESULT_OK)
+                    // TODO Toast with success adding pet
+                    Toast.makeText(this, "Pet created", Toast.LENGTH_SHORT);
+                break;
         }
-    }
-
-    private void onTripScheduled() {
-        // TODO add toast
     }
 }
