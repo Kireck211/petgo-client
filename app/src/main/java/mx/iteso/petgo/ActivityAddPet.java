@@ -147,7 +147,7 @@ public class ActivityAddPet extends AppCompatActivity implements View.OnClickLis
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         selectedImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
                         imageData = baos.toByteArray();
-                        Picasso.get().load(imageUri).centerCrop().into(mBinding.ivPetAddPet);
+                        Picasso.get().load(imageUri).fit().into(mBinding.ivPetAddPet);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }

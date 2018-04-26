@@ -20,6 +20,11 @@ public class AdapterAddress extends RecyclerView.Adapter<AdapterAddress.ViewHold
         mAddress = address;
     }
 
+    public void swapItems(List<Address> address) {
+        mAddress = address;
+        notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());

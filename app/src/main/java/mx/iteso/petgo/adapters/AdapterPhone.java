@@ -20,6 +20,11 @@ public class AdapterPhone extends RecyclerView.Adapter<AdapterPhone.ViewHolder> 
         mPhones = phones;
     }
 
+    public void swapItems(List<Phone> phones) {
+        mPhones = phones;
+        notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());

@@ -45,10 +45,8 @@ import mx.iteso.petgo.beans.Pet;
 import mx.iteso.petgo.beans.Phone;
 import mx.iteso.petgo.beans.User;
 import mx.iteso.petgo.databinding.FragmentProfileBinding;
-import mx.iteso.petgo.utils.Constants;
 
 import static mx.iteso.petgo.utils.Constants.ADD_PET;
-import static mx.iteso.petgo.utils.Constants.ADD_PET_IMAGE;
 import static mx.iteso.petgo.utils.Constants.FACEBOOK_PROVIDER;
 import static mx.iteso.petgo.utils.Constants.GOOGLE_PROVIDER;
 import static mx.iteso.petgo.utils.Constants.PARCELABLE_USER;
@@ -59,9 +57,12 @@ public class FragmentProfile extends Fragment {
     private User mUser;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseDatabase database;
-    private DatabaseReference reference;
     private AdapterPet mAdapterPet;
+    private AdapterPhone mAdapterPhone;
+    private AdapterAddress mAdapterAddress;
     private List<Pet> pets;
+    private List<Phone> phones;
+    private List<Address> address;
 
     public static FragmentProfile newInstance(User user) {
         FragmentProfile fragmentProfile = new FragmentProfile();
@@ -85,14 +86,14 @@ public class FragmentProfile extends Fragment {
         mUser = getArguments().getParcelable(PARCELABLE_USER);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("users/" + mUser.getKeyDatabase() + "/pets");
-        reference.addValueEventListener(new ValueEventListener() {
+        DatabaseReference petRef = database.getReference("users/" + mUser.getKeyDatabase() + "/pets");
+        petRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                pets = new ArrayList<>();
-                Pet pet;
                 if (!dataSnapshot.exists())
                     return;
+                pets = new ArrayList<>();
+                Pet pet;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     pet = snapshot.getValue(Pet.class);
                     pets.add(pet);
@@ -107,16 +108,57 @@ public class FragmentProfile extends Fragment {
             }
         });
 
+        DatabaseReference phoneRef = database.getReference("users/" + mUser.getKeyDatabase() + "/phone");
+        phoneRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists())
+                    return;
+                phones = new ArrayList<>();
+                Phone phone;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    phone = snapshot.getValue(Phone.class);
+                    phones.add(phone);
+                }
+                mAdapterPhone.swapItems(phones);
+                selectPhoneView();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        DatabaseReference addressRef = database.getReference("users" + mUser.getKeyDatabase() + "/address");
+        addressRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists())
+                    return;
+                address = new ArrayList<>();
+                Address addr;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    addr = snapshot.getValue(Address.class);
+                    address.add(addr);
+                }
+                mAdapterAddress.swapItems(address);
+                selectAddressView();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
 
         LinearLayoutManager layoutAddress = new LinearLayoutManager(getActivity());
         LinearLayoutManager layoutPhone = new LinearLayoutManager(getActivity());
         LinearLayoutManager layoutPet = new LinearLayoutManager(getActivity());
 
-        List<Address> address = new ArrayList<>();
-        List<Phone> phones = new ArrayList<>();
-        if (pets == null)
-            pets = new ArrayList<>();
+        setDataLists();
 
         RecyclerView rvAddress = mBinding.rvAddressProfile;
         RecyclerView rvPhone = mBinding.rvPhoneProfile;
@@ -126,15 +168,10 @@ public class FragmentProfile extends Fragment {
         rvPhone.setLayoutManager(layoutPhone);
         rvPet.setLayoutManager(layoutPet);
 
-        AdapterAddress adapterAddress = new AdapterAddress(address);
-        AdapterPhone adapterPhone = new AdapterPhone(phones);
+        setAdapters();
 
-        if (mAdapterPet == null)
-            mAdapterPet = new AdapterPet(pets);
-
-
-        rvAddress.setAdapter(adapterAddress);
-        rvPhone.setAdapter(adapterPhone);
+        rvAddress.setAdapter(mAdapterAddress);
+        rvPhone.setAdapter(mAdapterPhone);
         rvPet.setAdapter(mAdapterPet);
 
         Uri uri = Uri.parse(mUser.getPicture());
@@ -163,6 +200,7 @@ public class FragmentProfile extends Fragment {
         });
 
         selectPetView();
+        selectPhoneView();
 
         return mBinding.getRoot();
     }
@@ -200,12 +238,54 @@ public class FragmentProfile extends Fragment {
         editor.apply();
     }
 
+    private void setDataLists() {
+        if (pets == null) {
+            pets = new ArrayList<>();
+        }
+        if (phones == null) {
+            phones = new ArrayList<>();
+        }
+        if (address == null) {
+            address = new ArrayList<>();
+        }
+    }
+
+    private void setAdapters() {
+        if (mAdapterPet == null) {
+            mAdapterPet = new AdapterPet(pets);
+        }
+        if (mAdapterPhone == null) {
+            mAdapterPhone = new AdapterPhone(phones);
+        }
+        if (mAdapterAddress == null) {
+            mAdapterAddress = new AdapterAddress(address);
+        }
+    }
+
     private void selectPetView() {
         ViewSwitcher petSwitcher = mBinding.vsPetProfile;
         if (pets.size() > 0) {
             petSwitcher.setDisplayedChild(1);
         } else {
             petSwitcher.setDisplayedChild(0);
+        }
+    }
+
+    private void selectPhoneView() {
+        ViewSwitcher phoneSwitcher = mBinding.vsPhoneProfile;
+        if (phones.size() > 0) {
+            phoneSwitcher.setDisplayedChild(1);
+        } else {
+            phoneSwitcher.setDisplayedChild(0);
+        }
+    }
+
+    private void selectAddressView() {
+        ViewSwitcher addressSwitcher = mBinding.vsAddressProfile;
+        if (address.size() > 0) {
+            addressSwitcher.setDisplayedChild(1);
+        } else {
+            addressSwitcher.setDisplayedChild(0);
         }
     }
 }
