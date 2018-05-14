@@ -161,18 +161,18 @@ public class FragmentProfile extends Fragment {
         setDataLists();
 
         RecyclerView rvAddress = mBinding.rvAddressProfile;
-        RecyclerView rvPhone = mBinding.rvPhoneProfile;
-        RecyclerView rvPet = mBinding.rvPetProfile;
+        //RecyclerView rvPhone = mBinding.rvPhoneProfile;
+        //RecyclerView rvPet = mBinding.rvPetProfile;
 
         rvAddress.setLayoutManager(layoutAddress);
-        rvPhone.setLayoutManager(layoutPhone);
-        rvPet.setLayoutManager(layoutPet);
+        //rvPhone.setLayoutManager(layoutPhone);
+        //rvPet.setLayoutManager(layoutPet);
 
         setAdapters();
 
         rvAddress.setAdapter(mAdapterAddress);
-        rvPhone.setAdapter(mAdapterPhone);
-        rvPet.setAdapter(mAdapterPet);
+        //rvPhone.setAdapter(mAdapterPhone);
+        //rvPet.setAdapter(mAdapterPet);
 
         Uri uri = Uri.parse(mUser.getPicture());
         mBinding.ivUserProfile.setImageURI(uri);
@@ -190,14 +190,14 @@ public class FragmentProfile extends Fragment {
             }
         });
 
-        mBinding.fabProfile.setOnClickListener(new View.OnClickListener() {
+        /*mBinding.fabProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ActivityAddPet.class);
                 intent.putExtra(PARCELABLE_USER, mUser);
                 ((ActivityMain) getContext()).startActivityForResult(intent, ADD_PET);
             }
-        });
+        });*/
 
         selectPetView();
         selectPhoneView();
@@ -263,29 +263,29 @@ public class FragmentProfile extends Fragment {
     }
 
     private void selectPetView() {
-        ViewSwitcher petSwitcher = mBinding.vsPetProfile;
+        /*ViewSwitcher petSwitcher = mBinding.vsPetProfile;
         if (pets.size() > 0) {
             petSwitcher.setDisplayedChild(1);
         } else {
             petSwitcher.setDisplayedChild(0);
-        }
+        }*/
     }
 
     private void selectPhoneView() {
-        ViewSwitcher phoneSwitcher = mBinding.vsPhoneProfile;
+        /*ViewSwitcher phoneSwitcher = mBinding.vsPhoneProfile;
         if (phones.size() > 0) {
             phoneSwitcher.setDisplayedChild(1);
         } else {
             phoneSwitcher.setDisplayedChild(0);
-        }
+        }*/
     }
 
     private void selectAddressView() {
-        ViewSwitcher addressSwitcher = mBinding.vsAddressProfile;
+        /*ViewSwitcher addressSwitcher = mBinding.vsAddressProfile;
         if (address.size() > 0) {
             addressSwitcher.setDisplayedChild(1);
         } else {
             addressSwitcher.setDisplayedChild(0);
-        }
+        }*/
     }
 }

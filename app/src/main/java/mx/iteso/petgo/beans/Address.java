@@ -9,7 +9,7 @@ import java.util.Map;
 public class Address implements Parcelable {
     private String tokenId;
     private String address;
-    private Location location;
+    private MyLocation location;
     private int icon;
 
     public Address() {
@@ -31,11 +31,11 @@ public class Address implements Parcelable {
         this.address = address;
     }
 
-    public Location getLocation() {
+    public MyLocation getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(MyLocation location) {
         this.location = location;
     }
 
@@ -63,7 +63,7 @@ public class Address implements Parcelable {
     protected Address(Parcel in) {
         this.tokenId = in.readString();
         this.address = in.readString();
-        this.location = in.readParcelable(Location.class.getClassLoader());
+        this.location = in.readParcelable(MyLocation.class.getClassLoader());
         this.icon = in.readInt();
     }
 

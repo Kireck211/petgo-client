@@ -37,6 +37,11 @@
     <string name="hour_format">hh:mm</string>
     <string name="save_string">Save</string>
     <string name="cancel_string">Cancel</string>
+    <string name="sign_out">SIGN OUT</string>
+    <string name="phones">Phones</string>
+    <string name="address">Address</string>
+    <string name="pets">Pets</string>
+    <string name="phone_icon_description">phone icon</string>
 
     <string-array name="sizes">
         <item>Large</item>

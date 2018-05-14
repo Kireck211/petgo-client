@@ -35,7 +35,7 @@ public class AdapterPhone extends RecyclerView.Adapter<AdapterPhone.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Phone phone = mPhones.get(position);
-        mBinding.tvPhoneItem.setText(phone.getPhone());
+        mBinding.tvPhoneItem.setText(String.valueOf(phone.getPhone()));
     }
 
     @Override

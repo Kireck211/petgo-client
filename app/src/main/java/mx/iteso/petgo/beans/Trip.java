@@ -13,13 +13,23 @@ public class Trip implements Parcelable {
     private Map<String, Alert> alerts;
     private double amount;
     private String date_hour;
-    private Map<String, Location> locations;
+    private Map<String, MyLocation> address;
+    private Map<String, MyLocation> locations;
     private String status;
     private int time;
     private User user;
+    private String pet;
 
     public Trip() {
-        alerts = new HashMap<>();
+
+    }
+
+    public Trip(double amount, String date_hour, String status, int time, String pet) {
+        this.amount = amount;
+        this.date_hour = date_hour;
+        this.status = status;
+        this.time = time;
+        this.pet = pet;
     }
 
     public String getTokenId() {
@@ -54,11 +64,19 @@ public class Trip implements Parcelable {
         this.date_hour = date_hour;
     }
 
-    public Map<String, Location> getLocations() {
+    public Map<String, MyLocation> getAddress() {
+        return address;
+    }
+
+    public void setAddress(Map<String, MyLocation> address) {
+        this.address = address;
+    }
+
+    public Map<String, MyLocation> getLocations() {
         return locations;
     }
 
-    public void setLocations(Map<String, Location> locations) {
+    public void setLocations(Map<String, MyLocation> locations) {
         this.locations = locations;
     }
 
@@ -86,6 +104,14 @@ public class Trip implements Parcelable {
         this.user = user;
     }
 
+    public String getPet() {
+        return pet;
+    }
+
+    public void setPet(String pet) {
+        this.pet = pet;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -101,14 +127,20 @@ public class Trip implements Parcelable {
         }
         dest.writeDouble(this.amount);
         dest.writeString(this.date_hour);
+        dest.writeInt(this.address.size());
+        for (Map.Entry<String, MyLocation> entry : this.address.entrySet()) {
+            dest.writeString(entry.getKey());
+            dest.writeParcelable(entry.getValue(), flags);
+        }
         dest.writeInt(this.locations.size());
-        for (Map.Entry<String, Location> entry : this.locations.entrySet()) {
+        for (Map.Entry<String, MyLocation> entry : this.locations.entrySet()) {
             dest.writeString(entry.getKey());
             dest.writeParcelable(entry.getValue(), flags);
         }
         dest.writeString(this.status);
         dest.writeInt(this.time);
         dest.writeParcelable(this.user, flags);
+        dest.writeString(this.pet);
     }
 
     protected Trip(Parcel in) {
@@ -122,16 +154,24 @@ public class Trip implements Parcelable {
         }
         this.amount = in.readDouble();
         this.date_hour = in.readString();
+        int addressSize = in.readInt();
+        this.address = new HashMap<String, MyLocation>(addressSize);
+        for (int i = 0; i < addressSize; i++) {
+            String key = in.readString();
+            MyLocation value = in.readParcelable(MyLocation.class.getClassLoader());
+            this.address.put(key, value);
+        }
         int locationsSize = in.readInt();
-        this.locations = new HashMap<String, Location>(locationsSize);
+        this.locations = new HashMap<String, MyLocation>(locationsSize);
         for (int i = 0; i < locationsSize; i++) {
             String key = in.readString();
-            Location value = in.readParcelable(Location.class.getClassLoader());
+            MyLocation value = in.readParcelable(MyLocation.class.getClassLoader());
             this.locations.put(key, value);
         }
         this.status = in.readString();
         this.time = in.readInt();
         this.user = in.readParcelable(User.class.getClassLoader());
+        this.pet = in.readString();
     }
 
     public static final Creator<Trip> CREATOR = new Creator<Trip>() {

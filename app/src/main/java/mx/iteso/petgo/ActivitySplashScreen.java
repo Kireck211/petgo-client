@@ -60,6 +60,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
                          user = snapshot.getValue(User.class);
                          user.setKeyDatabase(snapshot.getKey());
                      }
+                     // TODO sharedPreferences onTrip
                      user.setProvider(provider);
                      Intent intent = new Intent(ActivitySplashScreen.this, ActivityMain.class);
                      intent.putExtra(PARCELABLE_USER, user);

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +13,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/iv_user_profile"
@@ -35,77 +31,85 @@
                 android:id="@+id/tv_user_name_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-            <ViewSwitcher
-                android:id="@+id/vs_phone_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="No phone added"/>
-
-                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_phone_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </ViewSwitcher>
-
-            <ViewSwitcher
-                android:id="@+id/vs_address_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="No address added"/>
-
-                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_address_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            </ViewSwitcher>
-
         </LinearLayout>
 
-        <ViewSwitcher
-            android:id="@+id/vs_pet_profile"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phones"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_phones_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btn_add_phone_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No pets registered"/>
+                android:text="@string/address"/>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_pet_profile"
+                android:id="@+id/rv_address_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-        </ViewSwitcher>
+            <Button
+                android:id="@+id/btn_add_address_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pets"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_pets_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_log_out_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SIGN OUT"/>
-
+            android:text="@string/sign_out"/>
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        app:srcCompat="@drawable/ic_add_black_24dp"/>
-
-    </LinearLayout>
 </ScrollView>
 
 </layout>

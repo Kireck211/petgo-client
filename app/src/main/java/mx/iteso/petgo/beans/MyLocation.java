@@ -3,11 +3,16 @@ package mx.iteso.petgo.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Location implements Parcelable {
+public class MyLocation implements Parcelable {
     private double latitude;
     private double longitude;
 
-    public Location() {
+    public MyLocation() {
+    }
+
+    public MyLocation(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public double getLatitude() {
@@ -37,20 +42,20 @@ public class Location implements Parcelable {
         dest.writeDouble(this.longitude);
     }
 
-    protected Location(Parcel in) {
+    protected MyLocation(Parcel in) {
         this.latitude = in.readDouble();
         this.longitude = in.readDouble();
     }
 
-    public static final Parcelable.Creator<Location> CREATOR = new Parcelable.Creator<Location>() {
+    public static final Parcelable.Creator<MyLocation> CREATOR = new Parcelable.Creator<MyLocation>() {
         @Override
-        public Location createFromParcel(Parcel source) {
-            return new Location(source);
+        public MyLocation createFromParcel(Parcel source) {
+            return new MyLocation(source);
         }
 
         @Override
-        public Location[] newArray(int size) {
-            return new Location[size];
+        public MyLocation[] newArray(int size) {
+            return new MyLocation[size];
         }
     };
 }
